@@ -1,0 +1,13 @@
+"Group","Task","Value","SE","Name","rank"
+"1HYA","Choice Reaction",0.8021,0.0459,"Choice Reaction",3
+"2HOA","Choice Reaction",0.9891,0.0485,"Choice Reaction",3
+"1HYA","Complex Processing",0.8205,0.0353,"Complex Processing",5
+"2HOA","Complex Processing",1.0301,0.0426,"Complex Processing",5
+"1HYA","Complex Reasoning",0.6273,0.0627,"Abstract Matching",6
+"2HOA","Complex Reasoning",0.9252,0.0616,"Abstract Matching",6
+"1HYA","CPT",0.8041,0.0729,"Attention",2
+"2HOA","CPT",0.9529,0.0846,"Attention",2
+"1HYA","Reaction",0.3399,0.0234,"Motor Processing",1
+"2HOA","Reaction",0.4672,0.0372,"Motor Processing",1
+"1HYA","Simple Processing",0.7129,0.0616,"Simple Processing",4
+"2HOA","Simple Processing",0.9622,0.0451,"Simple Processing",4

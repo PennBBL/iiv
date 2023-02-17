@@ -1,0 +1,51 @@
+,Subject,X,CCI,age,Race,Ethnicity,Handedness,Education,Sex,DX,DX_new,DX_graph,MMSE.Score,MoCA.Total,GDSTotal,CERADTotal,Group,Gender,Group_2,DiagnosisDate,Diagnosis,DxType,APOE
+1,10000,1,27,68,White,2,1,20,2,2,2,HOA,NA,29,7,NA,HOA,Female,HOA,NA,NA,NA,NA
+2,10001,2,39,73,White,2,2,15,2,2,2,HOA,NA,30,2,NA,HOA,Female,HOA,NA,NA,NA,NA
+3,10003,3,29,65,Black/African American,2,1,17,2,2,2,HOA,NA,27,3,NA,HOA,Female,HOA,NA,NA,NA,NA
+4,101366,4,37,73,White,2,1,12,2,2,2,HOA,30,30,4,97,HOA,Female,HOA,8/8/22,Normal,Consensus,E2/E3
+5,101657,5,46,91,Black/African American,2,1,12,2,2,2,HOA,30,27,0,75,HOA,Female,HOA,11/3/20,Normal,Consensus,E2/E3
+6,102257,6,51,79,Multiracial,1,1,20,2,2,2,HOA,27,27,19,77,HOA,Female,HOA,1/4/19,MCI - non-memory single,Consensus,E3/E3
+7,102439,7,41,75,White,2,1,18,2,2,2,HOA,29,27,1,90,HOA,Female,HOA,8/16/22,Normal,Consensus,E3/E3
+8,102439.01,8,31,82,White,2,1,16,1,2,2,HOA,30,NA,0,96,HOA,Male,HOA,8/16/22,MCI - non-memory multiple,Consensus,E3/E3
+9,103364.01,9,20,77,White,2,1,15,2,2,2,HOA,29,30,1,94,HOA,Female,HOA,9/27/10,Normal,Consensus,E3/E4
+10,103907,10,22,80,White,2,1,20,1,2,2,HOA,30,27,4,97,HOA,Male,HOA,12/9/21,Normal,Consensus,E3/E3
+11,105577,11,47,64,White,2,1,16,1,3,3,MCI,27,NA,5,64,AOA,Male,MCI,2/12/16,MCI - memory,Consensus,E3/E3
+12,106721.01,12,46,82,White,2,1,15,2,2,2,HOA,30,29,2,92,HOA,Female,HOA,3/18/22,Normal,Consensus,E3/E3
+13,106722.01,13,41,83,White,2,1,18,1,2,2,HOA,30,29,3,90,HOA,Male,HOA,3/18/22,Normal,Consensus,E2/E3
+14,106936,14,32,88,Black/African American,1,1,12,2,2,2,HOA,27,NA,0,76,HOA,Female,HOA,12/8/14,Normal,Consensus,E3/E3
+15,109545.01,15,81,84,Black/African American,2,1,12,1,3,3,MCI,23,23,3,NA,AOA,Male,MCI,7/17/15,Vascular Dementia (NINDS/AIREN),Single,E3/E3
+16,110140,16,41,83,White,2,1,12,2,1,3,MCI,19,9,4,32,AOA,Female,MCI,5/19/14,Normal,Consensus,E3/E4
+17,110661,17,55,81,White,2,1,15,2,1,3,MCI,24,18,7,49,AOA,Female,MCI,8/12/14,AD Probable (NINCDS/ADRDA),Single,E3/E3
+18,111145,18,38,88,Black/African American,2,1,16,2,2,2,HOA,29,26,2,82,HOA,Female,HOA,5/20/21,Normal,Consensus,E3/E3
+19,112761,19,48,94,White,2,1,16,1,2,2,HOA,28,28,1,74,HOA,Male,HOA,5/24/18,Normal,Consensus,E3/E3
+20,115919,20,44,80,Black/African American,2,1,15,2,2,2,HOA,30,29,1,86,HOA,Female,HOA,9/10/18,MCI - memory plus other,Consensus,E4/E4
+21,117158,21,45,68,White,2,1,13,1,3,3,MCI,25,25,8,70,AOA,Male,MCI,4/1/22,Normal,Consensus,E2/E3
+22,117223,22,81,61,White,1,1,16,2,3,3,MCI,25,21,4,65,AOA,Female,MCI,7/29/13,MCI - memory plus other,Consensus,E3/E3
+23,117297,23,53,77,White,2,1,18,1,3,3,MCI,27,21,7,65,AOA,Male,MCI,6/9/19,Dementia of undetermined etiology,Consensus,E3/E4
+24,117326,24,55,74,White,2,1,18,1,3,3,MCI,29,28,2,81,AOA,Male,MCI,2/17/22,Normal,Consensus,E3/E3
+25,117939,25,50,72,White,2,2,18,1,3,3,MCI,29,27,4,68,AOA,Male,MCI,8/25/21,Other,Consensus,E2/E3
+26,118259,26,74,62,White,2,1,16,1,3,3,MCI,29,28,5,NA,AOA,Male,MCI,4/8/22,MCI - memory,Consensus,E4/E4
+27,118418,27,38,66,White,2,1,14,2,2,2,HOA,29,30,4,84,HOA,Female,HOA,4/1/22,Normal,Consensus,E3/E3
+28,118594,28,28,67,White,2,1,18,2,2,2,HOA,30,NA,0,75,HOA,Female,HOA,2/9/22,Normal,Consensus,E3/E3
+29,118601,29,59,79,White,2,1,18,1,3,3,MCI,30,25,13,69,AOA,Male,MCI,4/22/22,Other,Consensus,E3/E3
+30,118700,30,46,70,White,2,1,18,2,2,2,HOA,27,28,4,92,HOA,Female,HOA,5/28/19,Normal,Consensus,E3/E4
+31,118764,31,61,69,White,2,1,18,1,4,4,SCM,30,26,1,NA,AOA,Male,HOA,8/4/14,Subjective Cognitive Complaints,Single,NA
+32,118775,32,29,72,Black/African American,2,1,13,2,3,3,MCI,29,26,5,72,AOA,Female,MCI,3/17/22,Normal,Consensus,E3/E3
+33,118834,33,66,63,White,2,1,16,2,4,4,SCM,29,28,5,NA,AOA,Female,HOA,6/9/14,Subjective Cognitive Complaints,Single,NA
+34,118835,34,38,73,White,2,1,18,2,2,2,HOA,29,29,0,90,HOA,Female,HOA,6/1/18,Normal,Consensus,E3/E4
+35,118877,35,33,69,White,2,2,16,2,4,4,SCM,28,27,2,NA,AOA,Female,HOA,8/11/14,Subjective Cognitive Complaints,Single,NA
+36,118916,36,59,75,Black/African American,2,1,16,2,3,3,MCI,29,26,6,72,AOA,Female,MCI,2/22/17,MCI - memory,Consensus,E3/E3
+37,119264,37,70,77,Black/African American,2,1,8,2,3,3,MCI,26,21,19,64,AOA,Female,MCI,10/6/14,MCI - memory plus other,Consensus,E3/E4
+38,119271,38,38,73,White,2,1,16,2,4,4,SCM,30,24,3,NA,AOA,Female,HOA,11/17/14,Subjective Cognitive Complaints,Single,NA
+39,119384,39,69,72,White,2,1,18,2,4,4,SCM,28,27,8,NA,AOA,Female,HOA,1/12/15,Subjective Cognitive Complaints,Single,NA
+40,119492,40,53,73,Black/African American,2,1,14,2,4,4,SCM,28,21,6,NA,AOA,Female,HOA,1/12/15,Subjective Cognitive Complaints,Single,NA
+41,119522,41,30,63,Black/African American,2,1,18,2,3,3,MCI,28,23,1,58,AOA,Female,MCI,5/10/21,Impaired - not MCI,Consensus,E3/E4
+42,119523,42,29,75,Black/African American,2,1,12,1,2,2,HOA,30,27,1,78,HOA,Male,HOA,5/28/21,Normal,Consensus,E3/E3
+43,119570,43,31,75,White,2,3,20,2,4,4,SCM,29,23,3,NA,AOA,Female,HOA,2/15/16,MCI Amnestic Single Domain (Petersen Criteria),Single,NA
+44,119578,44,73,61,White,2,1,16,1,4,4,SCM,30,26,15,NA,AOA,Male,HOA,2/2/15,Subjective Cognitive Complaints,Single,NA
+45,119589,45,55,77,White,2,2,16,1,4,4,SCM,30,26,8,NA,AOA,Male,HOA,1/12/15,Subjective Cognitive Complaints,Single,NA
+46,119604,46,40,77,White,2,1,16,2,4,4,SCM,30,26,7,NA,AOA,Female,HOA,10/12/22,MCI Amnestic Plus Other (Petersen Criteria),Single,NA
+47,119864,47,47,67,White,2,1,16,1,4,4,SCM,27,27,7,NA,AOA,Male,HOA,5/11/15,Subjective Cognitive Complaints,Single,NA
+48,119913,48,66,72,White,2,1,18,1,3,3,MCI,25,25,3,NA,AOA,Male,MCI,6/7/22,Primary progressive aphasia,Consensus,E3/E4
+49,119913.01,49,22,67,White,2,1,NA,2,2,2,HOA,NA,27,1,NA,HOA,Female,HOA,NA,NA,NA,NA
+50,107196,50,22,66,White,2,1,12,1,NA,NA,HOA,29,27,0,79,HOA,Male,HOA,4/6/22,Normal,Consensus,E3/E3
