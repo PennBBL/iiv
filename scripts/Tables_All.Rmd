@@ -1,0 +1,304 @@
+---
+title: "All Demos Tables"
+output: pdf_document
+header-includes:
+    - \usepackage{caption}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\captionsetup[table]{labelformat=empty}
+
+```{r echo=FALSE, results='asis'}
+library(arsenal)
+library(pwr)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+
+# Set working directory to wherever the healthy data live.
+# Source should reference summary_se_function.R so set that path to wherever it lives.
+setwd("/Users/hayurob/Documents/_Roalf_Lab/7T_GluCEST_Age/PrevData/input")
+demos <- read.csv("./data/old_demos.csv")
+
+# Demographics - create a new column based on Group, but rename HYA and HOA.
+demos_2<-read.csv("./data/healthy_demos_updated.csv")
+CCI<-read.csv("./data/healthy_CCI.csv")
+demos_2<-merge(demos_2, CCI, by="Subject", all=T)
+colnames(demos_2)<-c("Subject","X","age","group","Race","Gender","Education", "CCI")
+
+demos<-merge(demos,demos_2,all = TRUE)
+demos$cohort<-demos$group
+demos$cohort[demos$group==1]<-'HYA'
+demos$cohort[demos$Group_2=='HOA']<- 'HOA'
+demos<-subset(demos, cohort=='HYA' | cohort=='HOA', select = c(Subject,CCI,age,Race,Gender,Education,cohort))
+
+
+# Make table by cohort
+# To remove Total column:
+# my_controls<-tableby.control(total=FALSE) and put control=my_controls in tableby
+# Chi-sq p value not matching manual p value
+my_controls<-tableby.control(total=FALSE, numeric.stats = c("meansd","range"),digits = 2L,digits.p = 2L)
+healthy_table<-tableby(cohort~age+Gender+Race+Education+CCI,data=demos,control=my_controls)
+my_labels<-list(
+  age='Age',
+  Gender='Gender',
+  Race='Race',
+  Education='Education',
+  CCI='CCI Score'
+)
+
+summary(healthy_table,labelTranslations=my_labels,title='Demographics')
+
+# ADCOG data
+library(arsenal)
+
+# Demographics for HOA v MCI
+demos<-read.csv("./data/old_demos.csv")
+
+demos$apoe_graph<-demos$APOE
+demos$apoe_graph[demos$APOE=='E2/E3']<- 'Non-carriers'
+demos$apoe_graph[demos$APOE=='E3/E3']<- 'Non-carriers'
+demos$apoe_graph[demos$APOE=='E3/E4']<- 'Carriers'
+demos$apoe_graph[demos$APOE=='E4/E4']<- 'Carriers'
+
+# demos$CERADTotal<-as.numeric(as.character(demos$CERADTotal))
+cat("\\newpage")
+
+my_controls<-tableby.control(total=FALSE, numeric.stats = c("N","meansd","range"),digits = 2L,digits.p = 2L)
+old_table_scores_2<-tableby(Group_2~age+Gender+Race+Education+apoe_graph+CCI+MMSE.Score+MoCA.Total+GDSTotal+CERADTotal,data=demos,control=my_controls,na.tableby(FALSE))
+my_labels<-list(
+  age='Age',
+  MMSE.Score='MMSE',
+  MoCA.Total='MoCA',
+  GDSTotal='GDS',
+  CERADTotal='CERAD',
+  apoe_graph='APOE4'
+)
+
+summary(old_table_scores_2,labelTranslations=my_labels,title='Demographics & Scales')
+
+cat("\\newpage")
+my_controls<-tableby.control(total=FALSE, numeric.stats = c("meansd","range"),digits = 2L,digits.p = 2L)
+old_table<-tableby(Group_2~age+Gender+Race+Education,data=demos,control=my_controls)
+my_labels<-list(
+  age='Age'
+)
+
+summary(old_table,labelTranslations=my_labels,title='Demographics')
+
+cat("\\newpage")
+
+# Cognitive Scales - HOA v MCI
+my_controls<-tableby.control(total=FALSE, numeric.stats = c("N","meansd","range"),digits = 2L,digits.p = 2L)
+old_table_scores_2<-tableby(Group_2~CCI+MMSE.Score+MoCA.Total+GDSTotal+CERADTotal,data=demos,control=my_controls)
+my_labels<-list(
+  MMSE.Score='MMSE',
+  MoCA.Total='MoCA',
+  GDSTotal='GDS',
+  CERADTotal='CERAD'
+)
+
+summary(old_table_scores_2,labelTranslations=my_labels,title='Scales')
+
+
+# Cognitive Scales - HOA v AOA
+# my_controls<-tableby.control(total=FALSE, numeric.stats = c("N","meansd","range"),digits = 2L,digits.p = 2L)
+# old_table_scores<-tableby(Group_2~CCI+MMSE.Score+MoCA.Total+GDSTotal+CERADTotal,data=demos,control=my_controls)
+# my_labels<-list(
+#   MMSE.Score='MMSE',
+#   MoCA.Total='MoCA',
+#   GDSTotal='GDS',
+#   CERADTotal='CERAD'
+# )
+
+# summary(old_table_scores,labelTranslations=my_labels,title='Scales')
+
+# Demographics - HOA v MCI v SCM
+# my_controls<-tableby.control(total=FALSE, numeric.stats = c("meansd"),digits = 2L,digits.p = 2L)
+# old_table_2<-tableby(DX_new~age+Gender+Race+Education,data=demos,control=my_controls)
+# my_labels<-list(
+#   age='Age'
+# )
+
+# summary(old_table_2,labelTranslations=my_labels,title='Demographics (HOA v MCI v SMC)')
+
+cat("\\newpage")
+
+demos$DX_graph[demos$DX_graph=='SCM']<-'SMC'
+
+# Demographics - HOA v MCI v SCM
+my_controls<-tableby.control(total=FALSE, numeric.stats = c("meansd","range"),digits = 2L,digits.p = 2L)
+old_table<-tableby(DX_graph~age+Gender+Race+Education,data=demos,control=my_controls)
+my_labels<-list(
+  age='Age'
+)
+
+summary(old_table,labelTranslations=my_labels,title='Demographics (HOA v MCI v SMC)')
+
+cat("\\newpage")
+
+# Cognitive Scales - HOA v MCI v SCM
+my_controls<-tableby.control(total=FALSE, numeric.stats = c("N","meansd","range"),digits = 2L,digits.p = 2L)
+old_table_scores_2<-tableby(DX_graph~CCI+MMSE.Score+MoCA.Total+GDSTotal+CERADTotal,data=demos,control=my_controls)
+my_labels<-list(
+  MMSE.Score='MMSE',
+  MoCA.Total='MoCA',
+  GDSTotal='GDS',
+  CERADTotal='CERAD'
+)
+
+summary(old_table_scores_2,labelTranslations=my_labels,title='Scales (HOA v MCI v SMC)')
+
+cat("\\newpage")
+
+# Do power analysis - do table of all power analyses - NEED TO WORK ON
+
+## power analysis table - start with old adults data ##
+## this is on the OG analyses, not including GDS, does include KW Tests
+## May have to redo after we do ANOVAs ##
+all_old <- data.frame()
+reaction_old_rt <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.36298175, sig.level = 0.416)
+reaction_old_iiv <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.0651248175285903, sig.level = 0.645)
+reaction_all <- c(NA,reaction_old_rt$power,reaction_old_iiv$power)
+
+attention_old_pc <- pwr.t2n.test(n1 = 33, n2 = 16, d = 1.00911718660593, sig.level = 0.00693052542230224)
+attention_old_rt <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.0259232444982761, sig.level = 0.717)
+attention_old_iiv <- pwr.t2n.test(n1 = 31, n2 = 11, d = 0.473636020681758, sig.level = 0.319)
+attention_all <- c(attention_old_pc$power,attention_old_rt$power,attention_old_iiv$power)
+
+choice_old_pc <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.811912783090194, sig.level = 0.0138211937843607)
+choice_old_rt <- pwr.t2n.test(n1 = 33, n2 = 16, d = 1.15500604794034, sig.level = 0.00117057448060798)
+choice_old_iiv <- pwr.t2n.test(n1 = 32, n2 = 13, d = 0.856067005185744, sig.level = 0.024)
+choice_all <- c(choice_old_pc$power,choice_old_rt$power,choice_old_iiv$power)
+
+simple_old_pc <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.373850043196005, sig.level = 0.063)
+simple_old_rt <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.734735309973532, sig.level = 0.0649093155925898)
+simple_old_iiv <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.801827990431565, sig.level = 0.0577637752733098)
+simple_all <- c(simple_old_pc$power,simple_old_rt$power,simple_old_iiv$power)
+
+complex_old_pc <- pwr.t2n.test(n1 = 33, n2 = 16, d = 1.66610361556935, sig.level = 6.54480095503776e-05)
+complex_old_rt <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.582926542804248, sig.level = 0.039)
+complex_old_iiv <- pwr.t2n.test(n1 = 32, n2 = 10, d = 1.05070210519134, sig.level = 0.0334826216656264)
+complex_all <- c(complex_old_pc$power,complex_old_rt$power,complex_old_iiv$power)
+
+abstract_old_pc <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.426490617272144, sig.level = 0.175)
+abstract_old_rt <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.684883670011215, sig.level = 0.034)
+abstract_old_iiv <- pwr.t2n.test(n1 = 33, n2 = 16, d = 0.928876578944146, sig.level = 0.003)
+abstract_all <- c(abstract_old_pc$power,abstract_old_rt$power,abstract_old_iiv$power)
+
+all_old <- rbind(reaction_all,attention_all,choice_all,simple_all,complex_all,abstract_all)
+colnames(all_old) <- c('Accuracy','Reaction Time','IIV')
+rownames(all_old) <- c('Motor Processing','Attention','Choice Reaction','Simple Processing',
+                       'Complex Processing','Abstract Matching')
+all_old <- as.data.frame(all_old)
+
+all_old %>% 
+  tibble::rownames_to_column("Task") %>%
+  knitr::kable(caption = "HOA vs OAM Power Analyses") %>%
+  kableExtra::kable_styling(bootstrap_options = "bordered")
+  
+cat("\\newpage")
+
+## do the same thing but with healthy groups ##
+all_healthy <- data.frame()
+reaction_healthy_rt <- pwr.t2n.test(n1 = 33, n2 = 29, d = 0.462105121996369, sig.level = 0.095)
+reaction_healthy_iiv <- pwr.t2n.test(n1 = 33, n2 = 29, d = 0.713621759870296, sig.level = 0.001)
+reaction_all <- c(NA,reaction_healthy_rt$power,reaction_healthy_iiv$power)
+
+attention_healthy_pc <- pwr.t2n.test(n1 = 33, n2 = 29, d = 0.140962500205783, sig.level = 0.113)
+attention_healthy_rt <- pwr.t2n.test(n1 = 33, n2 = 29, d = 0.668151332588776, sig.level = 0.002)
+attention_healthy_iiv <- pwr.t2n.test(n1 = 31, n2 = 28, d = 0.343797378575165, sig.level = 0.058)
+attention_all <- c(attention_healthy_pc$power,attention_healthy_rt$power,attention_healthy_iiv$power)
+
+choice_healthy_pc <- pwr.t2n.test(n1 = 33, n2 = 29, d = 0.198580088829446, sig.level = 0.819)
+choice_healthy_rt <- pwr.t2n.test(n1 = 33, n2 = 29, d = 1.2032702800153, sig.level = 8.276e-06)
+choice_healthy_iiv <- pwr.t2n.test(n1 = 32, n2 = 29, d = 0.714077783670072, sig.level = 0.005)
+choice_all <- c(choice_healthy_pc$power,choice_healthy_rt$power,choice_healthy_iiv$power)
+
+simple_healthy_pc <- pwr.t2n.test(n1 = 33, n2 = 29, d = 0.102975346046809, sig.level = 0.946)
+simple_healthy_rt <- pwr.t2n.test(n1 = 33, n2 = 29, d = 1.21143338532427, sig.level = 9.470e-07)
+simple_healthy_iiv <- pwr.t2n.test(n1 = 33, n2 = 29, d = 0.844479303368494, sig.level = 0.0002843)
+simple_all <- c(simple_healthy_pc$power,simple_healthy_rt$power,simple_healthy_iiv$power)
+
+complex_healthy_pc <- pwr.t2n.test(n1 = 33, n2 = 29, d = 0.825228215196071, sig.level = 0.00339820590922139)
+complex_healthy_rt <- pwr.t2n.test(n1 = 33, n2 = 29, d = 1.42049991069732, sig.level = 2.599e-07)
+complex_healthy_iiv <- pwr.t2n.test(n1 = 32, n2 = 28, d = 0.964265142645485, sig.level = 0.005)
+complex_all <- c(complex_healthy_pc$power,complex_healthy_rt$power,complex_healthy_iiv$power)
+
+abstract_healthy_pc <- pwr.t2n.test(n1 = 33, n2 = 29, d = 0.372210935863419	, sig.level = 0.890)
+abstract_healthy_rt <- pwr.t2n.test(n1 = 33, n2 = 29, d = 1.59498300613185, sig.level = 7.838e-08)
+abstract_healthy_iiv <- pwr.t2n.test(n1 = 33, n2 = 29, d = 0.860434808952034, sig.level = 8.538e-05)
+abstract_all <- c(abstract_healthy_pc$power,abstract_healthy_rt$power,abstract_healthy_iiv$power)
+
+all_healthy <- rbind(reaction_all,attention_all,choice_all,simple_all,complex_all,abstract_all)
+colnames(all_healthy) <- c('Accuracy','Reaction Time','IIV')
+rownames(all_healthy) <- c('Motor Processing','Attention','Choice Reaction','Simple Processing',
+                       'Complex Processing','Abstract Matching')
+all_healthy <- as.data.frame(all_healthy)
+
+all_healthy %>% 
+  tibble::rownames_to_column("Task") %>%
+  knitr::kable(caption = "HYA vs HOA Power Analyses") %>%
+  kableExtra::kable_styling(bootstrap_options = "bordered")
+
+cat("\\newpage")
+
+# setwd("/Users/hayurob/Documents/_Roalf_Lab/7T_GluCEST_Age/PrevData/input")
+# # demos <- read.csv("./data/old_demos.csv")
+# source("./scripts/summary_se_function.R")
+# source("./scripts/other_functions.R")
+# 
+# # Demographics - create a new column based on Group, but rename HYA and HOA.
+# demos_2<-read.csv("./data/healthy_demos_updated.csv")
+# CCI<-read.csv("./data/healthy_CCI.csv")
+# demos_2<-merge(demos_2, CCI, by="Subject", all=T)
+# colnames(demos_2)<-c("Subject","X","age","group","Race","Gender","Education", "CCI")
+# 
+# demos<-merge(demos,demos_2,all = TRUE)
+# demos$cohort<-demos$group
+# demos$cohort[demos$group==1]<-'HYA'
+# demos$cohort[demos$Group_2=='HOA']<- 'HOA'
+# demos<-subset(demos, cohort=='HYA' | cohort=='HOA', select = c(Subject,CCI,age,Race,Gender,Education,cohort))
+# 
+# setwd("/Users/hayurob/Documents/_Roalf_Lab/7T_GluCEST_Age/PrevData/input/iiv_scores")
+# 
+# # Create strings of the tasks in order to use them for the following function, makeDF.
+# reaction<-'reaction'
+# choice_reaction<-'choice_reaction'
+# simple_processing<-'simple_processing_speed'
+# attention<-'cpt'
+# complex_processing<-'complex_processing_speed'
+# abstract_matching<-'complex_reasoning'
+# 
+# # Make data frames for each task, using the variables we just created.
+# reaction<-makeDF(reaction)
+# # There's one outlier, set as NA.
+# # reaction$median_rt[16]<-NA
+# choice_reaction<-makeDF(choice_reaction)
+# simple_processing<-makeDF(simple_processing)
+# attention<-makeDF(attention)
+# complex_processing<-makeDF(complex_processing)
+# abstract_matching<-makeDF(abstract_matching)
+# 
+# 
+# # Make table by cohort
+# # To remove Total column:
+# # my_controls<-tableby.control(total=FALSE) and put control=my_controls in tableby
+# # Chi-sq p value not matching manual p value
+# my_controls<-tableby.control(total=FALSE, numeric.stats = c("meansd","range"),digits = 2L,digits.p = 2L)
+# healthy_table<-tableby(cohort~age+Gender+Race+Education+CCI,data=demos,control=my_controls)
+# my_labels<-list(
+#   age='Age',
+#   Gender='Gender',
+#   Race='Race',
+#   Education='Education',
+#   CCI='CCI Score'
+# )
+# 
+# summary(healthy_table,labelTranslations=my_labels,title='Demographics')
+
+```
+
